@@ -1,0 +1,23 @@
+{# recherche/findby.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Employés{% endblock %}
+
+{% block body %}
+    <h1>Liste des employés</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Statut</th>
+        </tr>
+        {% for employe in ensEmployes %}
+            <tr>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td>{{ employe.statut }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

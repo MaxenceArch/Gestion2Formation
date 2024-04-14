@@ -1,0 +1,12 @@
+{# templates/emp_inscription/formulaire.html.twig #}
+
+<form method="post">
+    {{ form_start(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+
+    <button type="submit">Envoyer</button>
+
+    {{ form_end(form) }}
+</form>

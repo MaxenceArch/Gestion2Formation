@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Styles pour le formulaire de connexion */
+        .form-container {
+            max-width: 400px;
+            margin: 120px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-button {
+            padding: 10px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: 1px solid #218838;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: #218838;
+        }
+        .alert-warning {
+        border-color: #FF1B1B; /* Couleur rouge */
+        background-color: #FFB2B2; /* Fond rouge clair */
+        color: #FF1B1B; /* Texte rouge foncé */
+    }
+        .notification {
+    position: fixed;
+    top: 10px; /* Marge du haut de l'écran */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80%; /* Largeur de la notification */
+    max-width: 600px; /* Largeur maximale de la notification */
+    margin-top: 20px; /* Espacement supplémentaire du haut */
+    }
+        .alert {
+        border: 2px solid;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .image-container {
+    text-align: center; /* Pour centrer horizontalement */
+}
+
+.image-container img {
+    width: 100%; /* Pour occuper toute la largeur de la div parente */
+    max-width: 300px; /* Définir une largeur maximale pour éviter l'étirement excessif */
+    height: auto; /* Pour maintenir le ratio de l'image */
+    display: block; /* Pour corriger le comportement inline de l'image */
+    margin: 0 auto; /* Pour centrer l'image horizontalement */
+}
+    </style>
+    
+{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="image-container">
+        <img src="{{ asset('images/microsoft.png') }}" alt="Description de l'image" style="width: 180px; height: auto;">
+     </div>
+
+    <div class="form-container">
+        <h2>Connexion</h2>
+        {{ form_start(form) }}
+
+        <label for="{{ form.login.vars.id }}" class="form-label">Nom d'utilisateur:</label>
+        {{ form_widget(form.login, {'attr': {'class': 'form-input'}}) }}
+
+        <label for="{{ form.mdp.vars.id }}" class="form-label">Mot de passe:</label>
+        {{ form_widget(form.mdp, {'attr': {'class': 'form-input'}}) }}
+
+        <button type="submit" class="form-button" name="{{ form.connecter.vars.full_name }}">Se connecter</button>
+
+        {{ form_end(form) }}
+
+
+    </div>
+
+    <div class="notification">
+    {% for flash_message in app.flashes('error') %}
+        <div class="alert alert-warning">{{ flash_message }}</div>
+    {% endfor %}
+</div>
+
+{% endblock %}

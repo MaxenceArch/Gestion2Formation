@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+            .navbar {
+            background: linear-gradient(to right, #8e44ad, #c0392b); /* Dégradé de couleurs */
+            padding: 10px 20px;
+            border-radius: 10px; /* Coins arrondis */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Styles pour les liens dans la barre de navigation */
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px; /* Coins arrondis */
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* Animation de transition */
+        }
+
+        /* Animation au survol des liens */
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Légère opacité au survol */
+        }
+        /* Styles pour le formulaire d'ajout de formation */
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-button {
+            padding: 10px 16px;
+            background: linear-gradient(to right, #8e44ad, #c0392b);
+            color: #fff;
+            border: 1px solid #218838;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: #218838;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <nav class="navbar">
+        <a href="{{ path('app_formation_ajouter') }}">Ajouter une formation</a>
+        <a href="{{ path('app_affProduit') }}">Afficher les produits</a>
+        <a href="{{ path('app_aff') }}" >Afficher les formations</a>
+        <a href="{{ path('app_affEmploye') }}">Afficher les employés</a>
+        <a href="{{ path('app_liste_inscription_admin') }}" >Inscriptions en attente</a>
+        <a href="{{ path('app_liste_inscription_accepte') }}">Inscriptions Acceptée</a>
+        <a href="{{ path('app_liste_inscription_refuse') }}">Inscriptions Refusée</a>
+        <a href="{{ path('app_login') }}">Se déconnecter</a>
+    </nav>
+
+    <div class="form-container">
+        <h2>Ajouter une formation</h2>
+        {{ form_start(form) }}
+
+        <label for="{{ form.dateDebut.vars.id }}" class="form-label">Date de début:</label>
+        {{ form_widget(form.dateDebut, {'attr': {'class': 'form-input'}}) }}
+
+        <label for="{{ form.nbrHeure.vars.id }}" class="form-label">Nombre d'heures:</label>
+        {{ form_widget(form.nbrHeure, {'attr': {'class': 'form-input'}}) }}
+
+        <label for="{{ form.departement.vars.id }}" class="form-label">Département:</label>
+        {{ form_widget(form.departement, {'attr': {'class': 'form-input'}}) }}
+
+        <label for="{{ form.produit.vars.id }}" class="form-label">Produit:</label>
+        {{ form_widget(form.produit, {'attr': {'class': 'form-input'}}) }}
+
+        <label for="{{ form.description.vars.id }}" class="form-label">Description:</label>
+        {{ form_widget(form.description, {'attr': {'class': 'form-input'}}) }}
+
+        <button type="submit" class="form-button">Enregistrer</button>
+        {#<a href="{{ path('app_aff') }}" class="form-button">Annuler</a>#}
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Employe</title>
+    <style>
+        /* Styles pour la barre de navigation */
+        .navbar {
+            background: linear-gradient(to right, #8e44ad, #c0392b); /* Dégradé de couleurs */
+            padding: 10px 20px;
+            border-radius: 10px; /* Coins arrondis */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px; /* Coins arrondis */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Légère opacité au survol */
+        }
+
+        /* Styles personnalisés pour l'affichage des inscriptions */
+        .inscription-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        height: 75px; /* Hauteur fixe */
+       }
+        .inscription-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .inscription-details {
+            flex-grow: 1;
+        }
+
+        .inscription-details b {
+            color: red;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(to right, #8e44ad, #c0392b);
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #3F7CFF;
+            color: #fff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        /* Style pour le message d'alerte */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        .image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%; /* Assurez-vous que le conteneur de l'image prend toute la largeur */
+        }
+
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ path('app_formation_ajouter') }}">Ajouter une formation</a>
+        <a href="{{ path('app_affProduit') }}">Afficher les produits</a>
+        <a href="{{ path('app_aff') }}">Afficher les formations</a>
+        <a href="{{ path('app_affEmploye') }}">Afficher les employés</a>
+        <a href="{{ path('app_liste_inscription_admin') }}">Inscriptions en attente</a>
+        <a href="{{ path('app_liste_inscription_accepte') }}">Inscriptions Acceptée</a>
+        <a href="{{ path('app_liste_inscription_refuse') }}" >Inscriptions Refusée</a>
+        <a href="{{ path('app_login') }}">Se déconnecter</a>
+    </nav>
+
+    {% if message %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endif %}
+        <div class="inscription-buttons">
+            <a href="{{ path('app_ajout_produit') }}" class="btn btn-danger">Créer un produit</a>
+        </div>
+        </br>
+    {% for produit in ensProduit %}
+        <div class="inscription-container">
+            <div class="inscription-details">
+                <b>Libelle du produit :</b> {{ produit.libelle }}
+                {% if produit.libelle == "Ferrari" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Ferrari.png') }}" alt="Description de l'image" style="width: 60px; height: auto;">
+                </div>
+                {% endif %}
+
+                {% if produit.libelle == "Bugatti" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Bugatti.png') }}" alt="Description de l'image" style="width: 120px; height: auto;">
+                </div>
+                {% endif %}
+
+                {% if produit.libelle == "Lamborghini" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Lamborghini.png') }}" alt="Description de l'image" style="width: 80px; height: auto;">
+                </div>
+                {% endif %}
+
+                {% if produit.libelle == "Audi" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Audi.png') }}" alt="Description de l'image" style="width: 120px; height: auto;">
+                </div>
+                {% endif %}
+
+                {% if produit.libelle == "Tesla" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Tesla.png') }}" alt="Description de l'image" style="width: 85px; height: auto;">
+                </div>
+                {% endif %}
+
+                {% if produit.libelle == "Porsche" %}
+                 <div class="image-container">
+                    <img src="{{ asset('images/Porsche.png') }}" alt="Description de l'image" style="width: 70px; height: auto;">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>

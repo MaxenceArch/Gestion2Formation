@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Employe</title>
+    <style>
+        /* Styles pour la barre de navigation */
+        .navbar {
+            background: linear-gradient(to right, #8e44ad, #c0392b); /* Dégradé de couleurs */
+            padding: 10px 20px;
+            border-radius: 10px; /* Coins arrondis */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px; /* Coins arrondis */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Légère opacité au survol */
+        }
+
+        /* Styles personnalisés pour l'affichage des inscriptions */
+        .inscription-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .inscription-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .inscription-details {
+            flex-grow: 1;
+        }
+
+        .inscription-details b {
+            color: #333;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #3F7CFF;
+            color: #fff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        /* Style pour le message d'alerte */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #17a2b8;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ path('app_formation_ajouter') }}">Ajouter une formation</a>
+        <a href="{{ path('app_affProduit') }}">Afficher les produits</a>
+        <a href="{{ path('app_aff') }}">Afficher les formations</a>
+        <a href="{{ path('app_affEmploye') }}">Afficher les employés</a>
+        <a href="{{ path('app_liste_inscription_admin') }}">Inscriptions en attente</a>
+        <a href="{{ path('app_liste_inscription_accepte') }}">Inscriptions Acceptée</a>
+        <a href="{{ path('app_liste_inscription_refuse') }}" >Inscriptions Refusée</a>
+        <a href="{{ path('app_login') }}">Se déconnecter</a>
+    </nav>
+
+    {% if message %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endif %}
+
+    {% for inscription in ensInscription %}
+        {% if inscription.statut == "En attente" %}
+            <div class="inscription-container">
+                <div class="inscription-details">
+                    <b>id de l'inscription:</b> {{ inscription.id }}<br/>
+                    <b>login de l'employé:</b> {{ inscription.lemploye.login }}<br/>
+                    <b>id de la formation:</b> {{ inscription.laFormation.id }}<br/>
+                    <b>début de la formation :</b> {{inscription.laFormation.dateDebut | date("m/d/Y")}}<br/>
+                </div>
+                <div class="inscription-buttons">
+                    <a href="{{ path('app_refuser_inscription', {'id': inscription.id}) }}" class="btn btn-danger">Refuser</a>
+                    <a href="{{ path('app_accepter_inscription', {'id': inscription.id}) }}" class="btn btn-primary">Accepter</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
